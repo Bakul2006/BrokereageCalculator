@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Brokerage Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Brokerage Calculator</h1>
+    <form method="POST">
+        <label>Buy Price: <input type="number" name="buy_price" step="0.01" required></label>
+        <label>Sell Price: <input type="number" name="sell_price" step="0.01" required></label>
+        <label>Quantity: <input type="number" name="quantity" required></label>
+        <label>Trade Type:
+            <select name="trade_type">
+                <option value="delivery">Delivery</option>
+                <option value="intraday">Intraday</option>
+            </select>
+        </label>
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result %}
+    <h2>Breakdown:</h2>
+    <ul>
+        <li>Brokerage: ₹{{ result.brokerage }}</li>
+        <li>STT: ₹{{ result.stt }}</li>
+        <li>Transaction Charges: ₹{{ result.txn_charge }}</li>
+        <li>GST: ₹{{ result.gst }}</li>
+        <li>SEBI Charges: ₹{{ result.sebi_charge }}</li>
+        <li>Stamp Duty: ₹{{ result.stamp_duty }}</li>
+        <li><strong>Total Charges: ₹{{ result.total_charges }}</strong></li>
+        <li><strong>Net Profit/Loss: ₹{{ result.net_pl }}</strong></li>
+    </ul>
+    {% endif %}
+</body>
+</html>
